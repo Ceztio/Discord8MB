@@ -3,6 +3,8 @@ import subprocess as sp
 import sys
 import ffmpy
 
+temp_fix = 256 #Change this number to a higher value if the output is larger than 8mb.
+
 try:
     input_file_name = sys.argv[1]
     filename = "8mb-"+os.path.basename(input_file_name)
@@ -19,7 +21,7 @@ try:
 
     seconds = get_length(input_file_name)
     kBps = 8 * 8192 / seconds
-    kBps=kBps - 128
+    kBps=kBps - 128 - temp_fix
     size = str(kBps)+"k"
 
     ff = ffmpy.FFmpeg(
